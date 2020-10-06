@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Registration_Messaging:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Registration_Messaging</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="registration_messaging.war">
+      <element id="artifact" artifact-name="Registration_Messaging:war exploded" />
+    </root>
+  </artifact>
+</component>
