@@ -6,71 +6,70 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-  <title>Welcome to Messaging</title>
+  <h:head>
+    <title>Welcome to Messaging</title>
 
-  <!-- Required meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-  <!-- Bootstrap CSS -->
-  <h:outputStylesheet library="css" name="styles.css"/>
-  <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
-</h:head>
+    <!-- Bootstrap CSS -->
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
+  </h:head>
 
-<h:body>
-  <!-- Welcome -->
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-      <h1 class="display-3">Welcome to Messaging</h1>
-      <p class="lead">Please, do login...</p>
-      <hr class="my-2"/>
-    </div>
-  </div>
-
-
-  <!-- Login Form -->
-  <div class="container d-flex justify-content-center">
-    <div class="row">
-
-      <!-- Login -->
-      <div class="col-sm-12 col-md-12">
-        <h2>Login</h2>
-
-        <!-- Form -->
-        <div class="form-group">
-          <h:form>
-            <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
-              User name: <h:inputText styleClass="my-2" value="#{user.userName}" id="username_login"/>
-              Password <h:inputSecret styleClass="my-2" value="#{user.password}" id="password_login"/>
-
-              <!--
-              <h:commandButton value="Register">
-                <f:ajax execute="name username password" render="out"/>
-              </h:commandButton>
-              -->
-
-              <!--            <h:commandButton type="button" value="Register" onclick="checkPassword(this.form)"/>-->
-              <h:commandButton styleClass="my-2" value="Login" action="home"/>
-
-            </h:panelGrid>
-          </h:form>
-
-          <p class="d-flex justify-content-end">
-            <small class="text-success">Registration completed, you can do login.</small>
-          </p>
-        </div>
+  <h:body>
+    <!-- Welcome -->
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-3">Welcome to Messaging</h1>
+        <p class="lead">Please, do login...</p>
+        <hr class="my-2"/>
       </div>
-
     </div>
-  </div>
 
 
-  <hr class="my-2"/>
+    <!-- Login Form -->
+    <div class="container d-flex justify-content-center">
+      <div class="row">
+
+        <!-- Login -->
+        <div class="col-sm-12 col-md-12">
+          <h2>Login</h2>
+
+          <!-- Form -->
+          <div class="form-group">
+            <h:form>
+              <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
+                User name: <h:inputText styleClass="my-2" value="#{user.userName}" id="username_login"/>
+                Password <h:inputSecret styleClass="my-2" value="#{user.password}" id="password_login"/>
+
+                <!--
+                <h:commandButton value="Register">
+                  <f:ajax execute="name username password" render="out"/>
+                </h:commandButton>
+                -->
+
+                <!--<h:commandButton type="button" value="Register" onclick="checkPassword(this.form)"/>-->
+                <h:commandButton styleClass="my-2" value="Login" action="home"/>
+
+              </h:panelGrid>
+            </h:form>
+
+            <p class="d-flex justify-content-end">
+              <small class="text-success">Registration completed, you can do login.</small>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
 
+    <hr class="my-2"/>
 
-  <h:outputScript library="javascript" name="jquery.js"/>
-  <h:outputScript library="css" name="bootstrap-4.5.2-dist/js/bootstrap.min.js"/>
 
-</h:body>
+    <h:outputScript library="javascript" name="jquery.js"/>
+    <h:outputScript library="css" name="bootstrap-4.5.2-dist/js/bootstrap.min.js"/>
+
+  </h:body>
 </html>
