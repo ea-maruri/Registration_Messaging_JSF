@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
   <h:head>
-    <title>Welcome to Messaging</title>
+    <title>Register to Messaging</title>
 
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -28,12 +28,12 @@
     </div>
 
 
-    <!-- Log in button -->
+    <!-- Login button -->
     <div class="container">
       <div class="row">
         <div class="col-sm-12 d-flex justify-content-end">
           <h:form>
-            <h:commandButton styleClass="my-2" value="Login" action="login"/>
+            <h:commandButton styleClass="my-2 btn-warning" value="Login" action="login"/>
           </h:form>
         </div>
       </div>
@@ -51,27 +51,27 @@
           <!-- Form -->
           <div class="form-group">
             <h:form>
-              <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
+              <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
 
                 Name:
                   <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.name}" id="name_register"/>
+                  <h:messages errorClass="text-danger" for="name_register"/>
                 User name:
                   <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.userName}" id="username_register"/>
+                  <h:messages errorClass="text-danger" for="username_register"/>
                 Password:
                   <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.password}" id="password_register"/>
+                <h:messages errorClass="text-danger" for="password_register"/>
                 Confirm Password:
                   <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
-                  <h:messages errorClass="text-danger"/>
+                  <h:messages errorClass="text-danger" for="passwordConfirm_register"/>
+
 
                 <h:commandButton styleClass="my-2" value="Reigister" action="#{users_list.registerAUser(temp_user)}"/>
 
               </h:panelGrid>
             </h:form>
 
-
-            <p>
-              <small class="text-danger">Something went wrong!</small>
-            </p>
             <p class="d-flex justify-content-end">
               <small class="text-muted">Don't worry, no data is shared.</small>
             </p>
