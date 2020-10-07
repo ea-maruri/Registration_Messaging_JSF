@@ -122,7 +122,8 @@ public class UsersListBean implements Serializable {
     public String doLogout(UserBean user) {
         System.out.println("Doing a Logout...");
 
-        if(loggedUsers.contains(user) && user.isLogged()) {
+        //if(loggedUsers.contains(user))
+        if(user.isLogged()) {
             user.setLogged(false);
             this.loggedUsers.remove(user);
 

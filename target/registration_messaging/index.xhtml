@@ -28,12 +28,12 @@
     </div>
 
 
-    <!-- Log in button -->
+    <!-- Login button -->
     <div class="container">
       <div class="row">
         <div class="col-sm-12 d-flex justify-content-end">
           <h:form>
-            <h:commandButton styleClass="my-2" value="Login" action="login"/>
+            <h:commandButton styleClass="my-2 btn-warning" value="Login" action="login"/>
           </h:form>
         </div>
       </div>
@@ -67,7 +67,7 @@
                   <h:messages errorClass="text-danger" for="passwordConfirm_register"/>
 
 
-                <h:commandButton styleClass="my-2" value="Reigister" action="#{users_list.registerAUser(temp_user)}"/>
+                <h:commandButton styleClass="my-2 btn-success" value="Reigister" action="#{users_list.registerAUser(temp_user)}"/>
 
               </h:panelGrid>
             </h:form>

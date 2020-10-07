@@ -26,6 +26,8 @@
         </navigation-case>
     </navigation-rule>
 
+
+    <!-- From index -->
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
 
@@ -41,75 +43,98 @@
     </navigation-rule>
 
 
+    <!-- From again -->
     <navigation-rule>
         <from-view-id>/again.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/again.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>failure</from-outcome>
             <to-view-id>/again.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
+
+    <!-- From login -->
     <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>failure</from-outcome>
             <to-view-id>/again-login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
+
+    <!-- From success -->
     <navigation-rule>
-        <from-view-id>/again-login.xhtml</from-view-id>
+        <from-view-id>/success.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/again-login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>failure</from-outcome>
             <to-view-id>/again-login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
+    <!-- From again-login -->
+    <navigation-rule>
+        <from-view-id>/again-login.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/again-login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <!-- From home -->
     <navigation-rule>
         <from-view-id>/home.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
 
-    <navigation-rule>
-        <from-view-id>/home.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>failure</from-outcome>
             <to-view-id>/home-logout-fail.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
+
+    <!-- From home-logout -->
     <navigation-rule>
         <from-view-id>/home-logout-fail.xhtml</from-view-id>
+
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
+
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/home-logout-fail.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
+
 </faces-config>

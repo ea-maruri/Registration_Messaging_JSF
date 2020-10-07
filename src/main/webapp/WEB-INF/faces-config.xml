@@ -26,6 +26,7 @@
         </navigation-case>
     </navigation-rule>
 
+
     <!-- From index -->
     <navigation-rule>
         <from-view-id>/index.xhtml</from-view-id>
@@ -57,6 +58,7 @@
         </navigation-case>
     </navigation-rule>
 
+
     <!-- From login -->
     <navigation-rule>
         <from-view-id>/login.xhtml</from-view-id>
@@ -72,6 +74,21 @@
         </navigation-case>
     </navigation-rule>
 
+
+    <!-- From success -->
+    <navigation-rule>
+        <from-view-id>/success.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>failure</from-outcome>
+            <to-view-id>/again-login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <!-- From again-login -->
     <navigation-rule>
