@@ -4,6 +4,14 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd">
 
+    <application>
+        <message-bundle>messages</message-bundle>
+        <resource-bundle>
+            <base-name>messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
+
     <!--
     <application>
         <locale-config>
