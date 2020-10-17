@@ -58,6 +58,8 @@ public class UsersListBean implements Serializable {
      */
     public String registerAUser(TempUserBean user) {
         System.out.println("Doing a register...");
+        System.out.println("This is arriving from front end");
+        System.out.println(user.toString());
 
         if(user.getPassword().equals(user.getConfirmPassword())){
             UserBean userToRegister = new UserBean();
@@ -101,7 +103,11 @@ public class UsersListBean implements Serializable {
                     return "failure";
                 }
 
-                registeredUser.setLogged(true);
+                registeredUser.putLogged(true);
+                user.setName(registeredUser.getName());
+                user.setLogged(true);
+                System.out.println("This is registered user info: " + registeredUser.toString());
+                System.out.println("This is user logged status: " + user.isLogged());
                 this.loggedUsers.add(registeredUser);
 
                 System.out.println(OPS_STATUS.SUCCESS);
@@ -121,18 +127,19 @@ public class UsersListBean implements Serializable {
      */
     public String doLogout(UserBean user) {
         System.out.println("Doing a Logout...");
-
+        System.out.println(user.toString());
         //if(loggedUsers.contains(user))
+        System.out.println("This is user logged status: " + user.isLogged());
         if(user.isLogged()) {
             user.setLogged(false);
             this.loggedUsers.remove(user);
 
             System.out.println(OPS_STATUS.SUCCESS);
             return "success";
+        }else {
+            System.out.println(OPS_STATUS.FAILURE);
+            return "failure";
         }
-
-        System.out.println(OPS_STATUS.FAILURE);
-        return "failure";
     }
 
 
