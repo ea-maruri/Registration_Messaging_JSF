@@ -87,7 +87,7 @@
                 <f:ajax event="newmessage" execute="@form" render="@form"/>
               </f:websocket>
               <ui:repeat value="#{users_list.loggedUsers}" var="msg">
-                <h:outputText value="" /> one #{msg}
+                <h:outputText value="" /> #{msg}
               </ui:repeat>
             </h:form>
           </div>
@@ -98,9 +98,17 @@
         <div class="col-md-6">
           <h3>Registered Users:</h3>
 
-          <p class="text-success">
-            #{users_list.registeredUsers}
-          </p>
+          <div class="col-md-6 d-flex justify-content-center">
+            <h:form>
+              <h:commandButton value="send" action="#{msgBackingBean.getRegistered}"/>
+              <f:websocket channel="incoming">
+                <f:ajax event="newmessage1" execute="@form" render="@form"/>
+              </f:websocket>
+              <ui:repeat value="#{users_list.registeredUsers}" var="msg">
+                <h:outputText value="" /> #{msg}
+              </ui:repeat>
+            </h:form>
+          </div>
 
         </div>
       </div>

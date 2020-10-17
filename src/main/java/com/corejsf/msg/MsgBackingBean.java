@@ -36,6 +36,9 @@ MsgBackingBean implements Serializable {
     public void getList() {
         incoming.send("newmessage");
     }
+    public void getRegistered() {
+        incoming.send("newmessage1");
+    }
     // Getter
     public void setEnteredMessage(String inputMessage){
         enteredMessage = inputMessage;
