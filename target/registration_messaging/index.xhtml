@@ -54,23 +54,23 @@
               <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
 
                 #{msgs.indexFormName}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.name}" id="name_register"/>
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{user_interpreter.name}" id="name_register"/>
                   <h:messages errorClass="text-danger" for="name_register"/>
 
                 #{msgs.indexFormUserName}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.userName}" id="username_register"/>
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{user_interpreter.userName}" id="username_register"/>
                   <h:messages errorClass="text-danger" for="username_register"/>
 
                 #{msgs.indexFormPassword}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.password}" id="password_register"/>
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{user_interpreter.password}" id="password_register"/>
                 <h:messages errorClass="text-danger" for="password_register"/>
 
                 #{msgs.indexFormConfirmPassword}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{user_interpreter.confirmPassword}" id="passwordConfirm_register"/>
                   <h:messages errorClass="text-danger" for="passwordConfirm_register"/>
 
 
-                <h:commandButton styleClass="my-2 btn-success" value="Reigister" action="#{users_list.registerAUser(temp_user)}"/>
+                <h:commandButton styleClass="my-2 btn-success" value="Reigister" action="#{users_list.registerAUser(user_interpreter)}"/>
 
               </h:panelGrid>
             </h:form>

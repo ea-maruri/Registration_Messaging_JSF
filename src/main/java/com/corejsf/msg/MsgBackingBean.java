@@ -16,19 +16,26 @@ MsgBackingBean implements Serializable {
     @EJB
     private MessageService msgService;
     @Inject
+
     @Push
     private PushContext incoming;
+
+    @Push
+    private PushContext logged_in_users;
 
     private String enteredMessage;
 
     public List<String> getMessages() {
         return msgService.getMessages();
     }
-    public void onSendMessage() {
-        msgService.add(enteredMessage);
+
+//    public void onSendMessage() {
+//        msgService.add(enteredMessage);
+//        incoming.send("newmessage");
+//    }
+    public void getList() {
         incoming.send("newmessage");
     }
-
     // Getter
     public void setEnteredMessage(String inputMessage){
         enteredMessage = inputMessage;

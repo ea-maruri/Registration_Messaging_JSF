@@ -40,8 +40,8 @@
           <div class="form-group">
             <h:form>
               <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
-                User name: <h:inputText styleClass="my-2" value="#{user.userName}" id="username_login"/>
-                Password <h:inputSecret styleClass="my-2" value="#{user.password}" id="password_login"/>
+                User name: <h:inputText styleClass="my-2" value="#{user_interpreter.userName}" id="username_login"/>
+                Password <h:inputSecret styleClass="my-2" value="#{user_interpreter.password}" id="password_login"/>
 
                 <!--
                 <h:commandButton value="Register">
@@ -50,7 +50,7 @@
                 -->
 
                 <!--<h:commandButton type="button" value="Register" onclick="checkPassword(this.form)"/>-->
-                <h:commandButton styleClass="my-2 btn-warning" value="Login" action="#{users_list.doLogin(user)}"/>
+                <h:commandButton styleClass="my-2 btn-warning" value="Login" action="#{users_list.doLogin(user_interpreter, user)}"/>
 
               </h:panelGrid>
             </h:form>

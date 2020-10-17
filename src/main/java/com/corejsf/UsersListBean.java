@@ -1,6 +1,10 @@
 package com.corejsf;
 
+import com.corejsf.msg.MsgBackingBean;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.push.Push;
+import javax.faces.push.PushContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,13 +17,14 @@ import java.util.List;
  */
 @Named("users_list")
 @ApplicationScoped
+
 public class UsersListBean implements Serializable {
     /**
      * Instance Variables
      * <strong><em>registeredUsers</em></strong>, type: HashMap
      * <strong><em>loggedUsers</em></strong>, type: List
      */
-    private final HashMap<String, UserBean> registeredUsers = new HashMap<>();
+    private final HashMap<String, UserBeanInterpreter> registeredUsers = new HashMap<>();
     private List<UserBean> loggedUsers = new ArrayList<>();
 
 
@@ -45,7 +50,7 @@ public class UsersListBean implements Serializable {
      * Returns a HashMap of users (from UserBean class): registeredUsers
      * @return HashMap
      */
-    public HashMap<String, UserBean> getRegisteredUsers() {
+    public HashMap<String, UserBeanInterpreter> getRegisteredUsers() {
         return registeredUsers;
     }
 
@@ -56,19 +61,20 @@ public class UsersListBean implements Serializable {
      * @param user TempUserBean
      * @return String, success or failure (outcome)
      */
-    public String registerAUser(TempUserBean user) {
+    public String registerAUser(UserBeanInterpreter user) {
         System.out.println("Doing a register...");
         System.out.println("This is arriving from front end");
         System.out.println(user.toString());
 
         if(user.getPassword().equals(user.getConfirmPassword())){
-            UserBean userToRegister = new UserBean();
-            userToRegister.setName(user.getName());
-            userToRegister.setUserName(user.getUserName());
-            userToRegister.setPassword(user.getPassword());
+//            UserBean userToRegister = new UserBean();
+//            userToRegister.setName(user.getName());
+//            userToRegister.setUserName(user.getUserName());
+//            userToRegister.setPassword(user.getPassword());
 
-            if (this.registeredUsers.putIfAbsent(user.getUserName(), userToRegister) == null) {
+            if (this.registeredUsers.putIfAbsent(user.getUserName(), user) == null) {
                 System.out.println(OPS_STATUS.SUCCESS);
+                System.out.println(user.toString());
                 return "success";
             }
             else {
@@ -88,52 +94,52 @@ public class UsersListBean implements Serializable {
     /**
      * Add a <strong>registered</strong> user (in registeredUsers) to loggedUsers.
      * set logged = true
-     * @param user UserBean
+     * @param user UserBeanInterpreter
      * @return String, success or failure (an outcome)
      */
-    public String doLogin(UserBean user) {
+    public String doLogin(UserBeanInterpreter user, UserBean userBean) {
         System.out.println("Doing a Login...");
-
         if (this.registeredUsers.containsKey(user.getUserName())) {
-            UserBean registeredUser = this.registeredUsers.get(user.getUserName());
-            if (registeredUser.getPassword().equals(user.getPassword())) {
+            UserBeanInterpreter data = this.registeredUsers.get(user.getUserName());
+            if (data.getPassword().equals(user.getPassword())) {
                 if(user.isLogged()) {
                     System.out.println("User is logged");
                     System.out.println(OPS_STATUS.SUCCESS);
                     return "failure";
+                }else {
+                    userBean.setName(data.getName());
+                    userBean.setUserName(data.getUserName());
+                    userBean.setPassword(data.getPassword());
+                    userBean.setLogged(true);
+                    System.out.println("This is registered user info: " + userBean.toString());
+                    this.loggedUsers.add(userBean);
+                    System.out.println(OPS_STATUS.SUCCESS);
+//
+//                    MsgBackingBean msgBackingBean = new MsgBackingBean();
+//                    msgBackingBean.getList();
+                    return "success";
                 }
 
-                registeredUser.putLogged(true);
-                user.setName(registeredUser.getName());
-                user.setLogged(true);
-                System.out.println("This is registered user info: " + registeredUser.toString());
-                System.out.println("This is user logged status: " + user.isLogged());
-                this.loggedUsers.add(registeredUser);
-
-                System.out.println(OPS_STATUS.SUCCESS);
-                return "success";
             }
         }
-
         System.out.println(OPS_STATUS.FAILURE);
         return "failure";
     }
 
 
     /**
-     * Remove a user from loggedUsers and set logged = fales
+     * Remove a user from loggedUsers and set logged = false
      * @param user UserBean
      * @return String, success or failure (an outcome)
      */
+
     public String doLogout(UserBean user) {
         System.out.println("Doing a Logout...");
         System.out.println(user.toString());
-        //if(loggedUsers.contains(user))
         System.out.println("This is user logged status: " + user.isLogged());
         if(user.isLogged()) {
             user.setLogged(false);
             this.loggedUsers.remove(user);
-
             System.out.println(OPS_STATUS.SUCCESS);
             return "success";
         }else {

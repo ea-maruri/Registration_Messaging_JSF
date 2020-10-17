@@ -10,7 +10,7 @@ import java.util.Set;
  * @author EAMT on 8/10/2020
  */
 @ApplicationScoped
-@ServerEndpoint("/progress")
+@ServerEndpoint("/push")
 public class ServerWebSocket {
 
     private Set<Session> sessions = new HashSet<>();
