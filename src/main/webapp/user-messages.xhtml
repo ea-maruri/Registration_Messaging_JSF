@@ -7,40 +7,59 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://java.sun.com/jstl/core">
 
+  <f:view>
 
-  <!-- Log out and See messages buttons -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-<!--        <ul>-->
-<!--          <c:forEach items="#{users_list.getUserMessages(user.userName)}" var="message">-->
-<!--            <li>-->
-<!--              <h:outputText value="#{message}"/>-->
-<!--            </li>-->
-<!--          </c:forEach>-->
-<!--        </ul>-->
-        <p>
-          #{users_list.getUserMessages(user.userName)}
-        </p>
+    <h:head>
+      <title>#{user.userName} Messages</title>
+
+      <!-- Required meta tags for Bootstrap -->
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+      <!-- Bootstrap CSS -->
+      <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
+
+      <!-- Custom CSS -->
+      <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+
+    <h:body>
+
+      <!-- Log out and See messages buttons -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <!--        <ul>-->
+            <!--          <c:forEach items="#{users_list.getUserMessages(user.userName)}" var="message">-->
+            <!--            <li>-->
+            <!--              <h:outputText value="#{message}"/>-->
+            <!--            </li>-->
+            <!--          </c:forEach>-->
+            <!--        </ul>-->
+            <p>
+              #{users_list.getUserMessages(user.userName)}
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <hr class="my-2"/>
+      <hr class="my-2"/>
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h:form>
-          <h:panelGrid columns="3">
-            Message id:
-            <h:inputText/>
-            <h:commandButton styleClass="btn-danger" value="Remove"/>
-          </h:panelGrid>
-        </h:form>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h:form>
+              <h:panelGrid columns="3">
+                #{msgs.messagePrompt}:
+                <h:inputText/>
+                <h:commandButton styleClass="btn-danger" value="#{msgs.remove}"/>
+              </h:panelGrid>
+            </h:form>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
+    </h:body>
+
+  </f:view>
 
 </html>

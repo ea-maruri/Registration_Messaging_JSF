@@ -98,6 +98,7 @@
         </navigation-case>
     </navigation-rule>
 
+
     <!-- From again-login -->
     <navigation-rule>
         <from-view-id>/again-login.xhtml</from-view-id>

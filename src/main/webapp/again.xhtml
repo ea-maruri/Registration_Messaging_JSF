@@ -57,6 +57,7 @@
             <!-- Form -->
             <div class="form-group">
               <h:form>
+
                 <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
 
                   #{msgs.namePrompt}:
@@ -75,10 +76,13 @@
                   <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
                   <h:message errorClass="text-danger" for="passwordConfirm_register"/>
 
-
-                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
-
                 </h:panelGrid>
+
+                <div class="d-flex flex-row-reverse">
+                  <!--<h:commandButton type="button" value="#{msgs.register}" onclick="checkPassword(this.form)"/>-->
+                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
+                </div>
+
               </h:form>
 
 
@@ -91,10 +95,8 @@
                 <small class="text-secondary">#{msgs.noDataShared}.</small>
               </p>
 
-
             </div>
           </div>
-
         </div>
       </div>
 
