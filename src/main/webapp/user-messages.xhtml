@@ -10,7 +10,7 @@
   <f:view>
 
     <h:head>
-      <title>#{user.userName} Messages</title>
+      <title>#{currentUser.userName} - Messages</title>
 
       <!-- Required meta tags for Bootstrap -->
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -24,7 +24,20 @@
 
     <h:body>
 
-      <!-- Log out and See messages buttons -->
+      <div class="container">
+        <div class="row">
+          <div class="col d-flex">
+            <div>
+              <h:form>
+                <h:panelGrid columns="1">
+                  <h:commandButton styleClass="btn-dark" value="#{msgs.home}" action="home"/>
+                </h:panelGrid>
+              </h:form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
@@ -36,7 +49,7 @@
             <!--          </c:forEach>-->
             <!--        </ul>-->
             <p>
-              #{users_list.getUserMessages(user.userName)}
+              #{usersManager.getUserMessages(currentUser.userName)}
             </p>
           </div>
         </div>
@@ -49,7 +62,7 @@
           <div class="col">
             <h:form>
               <h:panelGrid columns="3">
-                #{msgs.messagePrompt}:
+                <strong>#{msgs.messageIdPrompt}:</strong>
                 <h:inputText/>
                 <h:commandButton styleClass="btn-danger" value="#{msgs.remove}"/>
               </h:panelGrid>

@@ -26,7 +26,7 @@
       <!-- Title -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-5">#{msgs.startMessaging}, #{user.userName}</h1>
+          <h1 class="display-5">#{msgs.startMessaging}, #{currentUser.userName}</h1>
           <hr class="my-2"/>
         </div>
       </div>
@@ -38,7 +38,7 @@
           <div class="col-sm-12 d-flex justify-content-around">
             <h:form>
               <h:commandButton styleClass="my-4 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
-              <h:commandButton styleClass="my-4 ml-5 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+              <h:commandButton styleClass="my-4 ml-5 btn-danger" value="#{msgs.logout}" action="#{usersManager.doLogout(currentUser)}"/>
             </h:form>
 
             <p>
@@ -58,18 +58,18 @@
 
             <h:form>
               <h:panelGrid columns="2">
-                #{msgs.receiverPrompt}:
+                <strong>#{msgs.receiverPrompt}:<strong></strong>
                 <h:inputText value="#{temp_message.receiver}"/>
 
-                #{msgs.messagePrompt}:
+                <strong>#{msgs.messagePrompt}:</strong>
                 <h:inputTextarea value="#{temp_message.message}" rows="9" cols="55"/>
 
               </h:panelGrid>
 
               <div class="d-flex flex-row-reverse">
                 <h:commandButton value="#{msgs.send}" styleClass="btn-success"
-                                 action="#{users_list.sendMessage(
-                                                              user.userName,
+                                 action="#{usersManager.sendMessage(
+                                                              currentUser.userName,
                                                               temp_message.receiver,
                                                               temp_message.message
                                                            )}"/>
@@ -114,7 +114,7 @@
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage" execute="@form" render="@form"/>
                 </f:websocket>
-                <ui:repeat value="#{users_list.loggedUsers}" var="msg">
+                <ui:repeat value="#{usersManager.loggedUsers}" var="msg">
                   <h:outputText value="" /> #{msg}
                 </ui:repeat>
               </h:form>
@@ -134,7 +134,7 @@
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage1" execute="@form" render="@form"/>
                 </f:websocket>
-                <ui:repeat value="#{users_list.registeredUsers}" var="msg">
+                <ui:repeat value="#{usersManager.registeredUsers}" var="msg">
                   <h:outputText value="" /> #{msg}
                 </ui:repeat>
               </h:form>

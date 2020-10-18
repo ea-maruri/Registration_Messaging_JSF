@@ -27,7 +27,7 @@
       <!-- Welcome -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">#{msgs.welcome}</h1>
+          <h1 class="display-3">#{msgs.welcome}</h1>
           <p class="lead">#{msgs.indexSubTitle}...</p>
           <hr class="my-2"/>
         </div>
@@ -52,33 +52,37 @@
 
           <!-- Register -->
           <div class="col-sm-12 col-md-12">
-            <h2 class="text-center">#{msgs.register}</h2>
+            <h2 class="text-center display-4">#{msgs.register}</h2>
 
             <!-- Form -->
             <div class="form-group">
               <h:form>
+
                 <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
 
-                  #{msgs.namePrompt}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.name}" id="name_register"/>
+                  <strong>#{msgs.namePrompt}:</strong>
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{tempUser.name}" id="name_register"/>
                   <h:message errorClass="text-danger" for="name_register"/>
 
-                  #{msgs.userNamePrompt}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.userName}" id="username_register"/>
+                  <strong>#{msgs.userNamePrompt}:</strong>
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{tempUser.userName}" id="username_register"/>
                   <h:message errorClass="text-danger" for="username_register"/>
 
-                  #{msgs.passwordPrompt}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.password}" id="password_register"/>
+                  <strong>#{msgs.passwordPrompt}</strong>
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{tempUser.password}" id="password_register"/>
                   <h:message errorClass="text-danger" for="password_register"/>
 
-                  #{msgs.confirmPasswordPrompt}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
+                  <strong>#{msgs.confirmPasswordPrompt}:</strong>
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{tempUser.confirmPassword}" id="passwordConfirm_register"/>
                   <h:message errorClass="text-danger" for="passwordConfirm_register"/>
 
-
-                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
-
                 </h:panelGrid>
+
+                <div class="d-flex flex-row-reverse">
+                  <!--<h:commandButton type="button" value="#{msgs.register}" onclick="checkPassword(this.form)"/>-->
+                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{usersManager.registerAUser(tempUser)}"/>
+                </div>
+
               </h:form>
 
 
@@ -91,10 +95,8 @@
                 <small class="text-secondary">#{msgs.noDataShared}.</small>
               </p>
 
-
             </div>
           </div>
-
         </div>
       </div>
 

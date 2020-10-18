@@ -52,17 +52,17 @@
 
           <!-- Login -->
           <div class="col-sm-12 col-md-12">
-            <h2 class="text-center">#{msgs.login}</h2>
+            <h2 class="text-center display-4">#{msgs.login}</h2>
 
             <!-- Form -->
             <div class="form-group">
               <h:form>
                 <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
-                  #{msgs.userNamePrompt}:
-                  <h:inputText styleClass="ml-2 my-2" value="#{temp_user.userName}" id="username_login"/>
+                  <strong>#{msgs.userNamePrompt}:</strong>
+                  <h:inputText styleClass="ml-2 my-2" value="#{tempUser.userName}" id="username_login"/>
 
-                  #{msgs.passwordPrompt}:
-                  <h:inputSecret styleClass="ml-2 my-2" value="#{temp_user.password}" id="password_login"/>
+                  <strong>#{msgs.passwordPrompt}:</strong>
+                  <h:inputSecret styleClass="ml-2 my-2" value="#{tempUser.password}" id="password_login"/>
 
                   <!--
                   <h:commandButton value="Register">
@@ -73,7 +73,7 @@
                 </h:panelGrid>
 
                 <div class="d-flex flex-row-reverse">
-                  <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="#{users_list.doLogin(temp_user, user)}"/>
+                  <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="#{usersManager.doLogin(tempUser, currentUser)}"/>
                 </div>
 
               </h:form>
