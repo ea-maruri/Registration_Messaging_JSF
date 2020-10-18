@@ -1,5 +1,6 @@
 package com.corejsf;
 
+import com.corejsf.msg.Message;
 import com.corejsf.msg.MsgBackingBean;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -8,6 +9,7 @@ import javax.faces.push.PushContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,8 +30,12 @@ public class UsersListBean implements Serializable {
     private List<UserBean> loggedUsers = new ArrayList<>();
 
 
-    /*Getters and Setters*/
+    public UsersListBean getInstance() {
+       return this;
+    }
 
+
+    /*Getters and Setters*/
     /**
      * Returns loggedUsers instance variable
      * @return List
@@ -58,13 +64,12 @@ public class UsersListBean implements Serializable {
     // Methods
     /**
      * Add to registeredUsers a user if follows all rules and everything is OK
-     * @param user TempUserBean
+     * @param user UserBeanInterpreter
      * @return String, success or failure (outcome)
      */
     public String registerAUser(UserBeanInterpreter user) {
         System.out.println("Doing a register...");
-        System.out.println("This is arriving from front end");
-        System.out.println(user.toString());
+        System.out.println("User from front end: " + user.toString());
 
         if(user.getPassword().equals(user.getConfirmPassword())){
 //            UserBean userToRegister = new UserBean();
@@ -145,6 +150,50 @@ public class UsersListBean implements Serializable {
         }else {
             System.out.println(OPS_STATUS.FAILURE);
             return "failure";
+        }
+    }
+
+
+
+    public UserBeanInterpreter getUserByName(String userName) {
+        UserBeanInterpreter user;
+        user = this.registeredUsers.getOrDefault(userName, null);
+
+        System.out.println("Try to return " + user + ". Received name: " + userName);
+
+        return user;
+    }
+
+
+    public void sendMessage(String sender, String receiver, String msgText) {
+        UserBeanInterpreter userBeanInterpreter = this.getUserByName(receiver);
+        if (userBeanInterpreter != null) {
+            System.out.printf("Messages of %s: %s\n", userBeanInterpreter, userBeanInterpreter.getMessagesList());
+            System.out.println("Send message to " + userBeanInterpreter);
+
+            Message message = new Message(Calendar.getInstance().getTime(), sender, receiver, msgText);
+            userBeanInterpreter.getMessagesList().add(message);
+            System.out.printf("Messages of %s: %s\n", userBeanInterpreter, userBeanInterpreter.getMessagesList());
+        }
+        else {
+            System.out.println("Cannot send message because received is null");
+        }
+
+    }
+
+
+    public String getUserMessages(String userName) {
+        if (this.registeredUsers.containsKey(userName)) {
+            UserBeanInterpreter user = this.registeredUsers.get(userName);
+            StringBuilder sb = new StringBuilder();
+            for (Message msg : user.getMessagesList()) {
+                sb.append(msg).append("\n");
+            }
+
+            return sb.toString();
+        }
+        else {
+            return "No messages";
         }
     }
 

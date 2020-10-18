@@ -11,8 +11,7 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class
-MsgBackingBean implements Serializable {
+public class MsgBackingBean implements Serializable {
     @EJB
     private MessageService msgService;
     @Inject

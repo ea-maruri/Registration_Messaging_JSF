@@ -26,12 +26,13 @@
     </div>
 
 
-    <!-- Log out button -->
+    <!-- Log out and See messages buttons -->
     <div class="container">
       <div class="row">
         <div class="col-sm-12 d-flex justify-content-end">
           <h:form>
-            <h:commandButton styleClass="my-2 btn-danger" value="Log out" action="#{users_list.doLogout(user)}"/>
+            <h:commandButton styleClass="my-2 btn-primary" value="See messages" action="user-messages"/>
+            <h:commandButton styleClass="my-2 ml-5 btn-danger" value="Log out" action="#{users_list.doLogout(user)}"/>
           </h:form>
         </div>
       </div>
@@ -44,15 +45,26 @@
         <div class="col-sm-12 d-flex justify-content-center">
 
           <h:form>
-            <h:panelGrid columns="1">
-              <h:inputTextarea rows="9" cols="55"/>
+            <h:panelGrid columns="2">
+              Receiver:
+              <h:inputText value="#{temp_message.receiver}"/>
+
+              Message:
+              <h:inputTextarea value="#{temp_message.message}" rows="9" cols="55"/>
+
               <div class="d-flex flex-row-reverse">
-                <h:commandButton value="Send" styleClass="btn-success"/>
+                <h:commandButton value="Send" styleClass="btn-success"
+                                 action="#{users_list.sendMessage(
+                                                              user.userName,
+                                                              temp_message.receiver,
+                                                              temp_message.message
+                                                           )}"/>
               </div>
             </h:panelGrid>
           </h:form>
 
         </div>
+
 
         <div class="col-sm-12 d-flex justify-content-center">
           <h:form>
@@ -92,6 +104,8 @@
             </h:form>
           </div>
         </div>
+
+
 
 
         <!-- Registered users -->
