@@ -7,16 +7,26 @@ import java.util.Objects;
  * @author EAMT on 17/10/2020
  */
 public class Message {
+    private final int id;
     private final Date dateSent;
     private final String sender;
     private final String receiver;
     private final String message;
 
+
+    /**
+     * Constructor for a message. Initializes the <strong>id</strong>
+     * @param dateSent Date
+     * @param sender String
+     * @param receiver String
+     * @param message String
+     */
     public Message(Date dateSent, String sender, String receiver, String message) {
         this.dateSent = dateSent;
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.id = this.hashCode();
     }
 
 
@@ -41,11 +51,11 @@ public class Message {
     @Override
     public String toString() {
         return "Message {" +
-                "\tid=" + hashCode() +
-                "\tdateSent=" + dateSent +
-                "\tsender='" + sender + '\'' +
-                "\nreceiver='" + receiver + '\'' +
-                "\nmessage='" + message + '\'' +
+                "id=" + id +
+                ", dateSent=" + dateSent +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }
