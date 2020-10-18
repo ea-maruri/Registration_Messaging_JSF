@@ -24,7 +24,17 @@
 
     <h:body>
 
-      <div class="container">
+      <!-- Title -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Messages #{currentUser.userName}</h1>
+          <hr class="my-2"/>
+        </div>
+      </div>
+
+
+      <!-- Home Button -->
+      <div class="container mt-1">
         <div class="row">
           <div class="col d-flex">
             <div>
@@ -37,6 +47,9 @@
           </div>
         </div>
       </div>
+
+
+      <hr class="mb-5 mt-3"/>
 
       <div class="container">
         <div class="row">
@@ -55,9 +68,12 @@
         </div>
       </div>
 
+
       <hr class="my-2"/>
 
-      <div class="container">
+
+      <!-- Remove Messages form -->
+      <div class="container mt-3">
         <div class="row">
           <div class="col">
             <h:form>
@@ -67,6 +83,12 @@
                 <h:commandButton styleClass="btn-danger" value="#{msgs.remove}"/>
               </h:panelGrid>
             </h:form>
+
+            <p>
+              <small class="text-muted">
+                Use the id, to remove the message.
+              </small>
+            </p>
           </div>
         </div>
       </div>
