@@ -35,10 +35,12 @@
       <!-- Log out and See messages buttons -->
       <div class="container">
         <div class="row">
-          <div class="col-sm-12 d-flex justify-content-around">
-            <h:form>
-              <h:commandButton styleClass="my-4 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
-              <h:commandButton styleClass="my-4 ml-5 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+          <div class="col-sm-12">
+            <h:form styleClass="w-100">
+              <div class="d-flex justify-content-between">
+                <h:commandButton styleClass="my-4 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
+                <h:commandButton styleClass="my-4 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+              </div>
             </h:form>
           </div>
         </div>
@@ -92,7 +94,7 @@
       </div>
 
 
-      <hr class="my-2"/>
+      <hr class="my-5"/>
 
 
       <!-- List of users -->
@@ -117,7 +119,6 @@
 
 
 
-
           <!-- Registered users -->
           <div class="col-md-6">
             <h3>Registered Users:</h3>
@@ -137,6 +138,7 @@
           </div>
         </div>
       </div>
+
     </f:view>
 
 

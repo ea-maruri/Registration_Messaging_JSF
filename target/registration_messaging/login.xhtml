@@ -21,6 +21,7 @@
 
   <h:body>
 
+    <!-- Creates a JSF View, which is a container that holds all of the components that are part of the view. -->
     <f:view>
 
       <!-- Welcome -->
@@ -51,17 +52,17 @@
 
           <!-- Login -->
           <div class="col-sm-12 col-md-12">
-            <h2 class="text-center">Login</h2>
+            <h2 class="text-center">#{msgs.login}</h2>
 
             <!-- Form -->
             <div class="form-group">
               <h:form>
                 <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
                   #{msgs.userNamePrompt}:
-                  <h:inputText styleClass="my-2" value="#{temp_user.userName}" id="username_login"/>
+                  <h:inputText styleClass="ml-2 my-2" value="#{temp_user.userName}" id="username_login"/>
 
                   #{msgs.passwordPrompt}:
-                  <h:inputSecret styleClass="my-2" value="#{temp_user.password}" id="password_login"/>
+                  <h:inputSecret styleClass="ml-2 my-2" value="#{temp_user.password}" id="password_login"/>
 
                   <!--
                   <h:commandButton value="Register">
@@ -69,14 +70,18 @@
                   </h:commandButton>
                   -->
 
-                  <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="#{users_list.doLogin(temp_user, user)}"/>
-
                 </h:panelGrid>
+
+                <div class="d-flex flex-row-reverse">
+                  <!--<h:commandButton type="button" value="Register" onclick="checkPassword(this.form)"/>-->
+                  <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="#{users_list.doLogin(temp_user, user)}"/>
+                </div>
+
               </h:form>
 
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
 

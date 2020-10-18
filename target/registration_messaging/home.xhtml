@@ -35,10 +35,12 @@
       <!-- Log out and See messages buttons -->
       <div class="container">
         <div class="row">
-          <div class="col-sm-12 d-flex justify-content-end">
-            <h:form>
-              <h:commandButton styleClass="my-2 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
-              <h:commandButton styleClass="my-2 ml-5 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+          <div class="col-sm-12">
+            <h:form styleClass="w-100">
+              <div class="d-flex justify-content-between">
+                <h:commandButton styleClass="my-4 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
+                <h:commandButton styleClass="my-4 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+              </div>
             </h:form>
           </div>
         </div>
@@ -53,20 +55,22 @@
             <h:form>
               <h:panelGrid columns="2">
                 #{msgs.receiverPrompt}:
-                  <h:inputText value="#{temp_message.receiver}"/>
+                <h:inputText value="#{temp_message.receiver}"/>
 
                 #{msgs.messagePrompt}:
                 <h:inputTextarea value="#{temp_message.message}" rows="9" cols="55"/>
 
-                <div class="d-flex flex-row-reverse">
-                  <h:commandButton value="#{msgs.send}" styleClass="btn-success"
-                                   action="#{users_list.sendMessage(
+              </h:panelGrid>
+
+              <div class="d-flex flex-row-reverse">
+                <h:commandButton value="#{msgs.send}" styleClass="btn-success"
+                                 action="#{users_list.sendMessage(
                                                               user.userName,
                                                               temp_message.receiver,
                                                               temp_message.message
                                                            )}"/>
-                </div>
-              </h:panelGrid>
+              </div>
+
             </h:form>
 
           </div>
@@ -76,7 +80,7 @@
           <div class="col-sm-12 d-flex justify-content-center">
             <h:form>
               <h:inputText value="#{msgBackingBean.enteredMessage}"/>
-              <h:commandButton value="send" action="#{msgBackingBean.onSendMessage}"/>
+              <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.onSendMessage}"/>
               <f:websocket channel="incoming">
                 <f:ajax event="newmessage" execute="@form" render="@form"/>
               </f:websocket>
@@ -90,7 +94,7 @@
       </div>
 
 
-      <hr class="my-2"/>
+      <hr class="my-5"/>
 
 
       <!-- List of users -->
@@ -102,7 +106,7 @@
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="send" action="#{msgBackingBean.getList}"/>
+                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getList}"/>
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage" execute="@form" render="@form"/>
                 </f:websocket>
@@ -115,14 +119,13 @@
 
 
 
-
           <!-- Registered users -->
           <div class="col-md-6">
             <h3>Registered Users:</h3>
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="send" action="#{msgBackingBean.getRegistered}"/>
+                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getRegistered}"/>
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage1" execute="@form" render="@form"/>
                 </f:websocket>
@@ -135,8 +138,8 @@
           </div>
         </div>
       </div>
-    </f:view>
 
+    </f:view>
 
 
     <!-- Optional JavaScript -->

@@ -57,6 +57,7 @@
             <!-- Form -->
             <div class="form-group">
               <h:form>
+
                 <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
 
                   #{msgs.namePrompt}:
@@ -80,16 +81,15 @@
                 <div class="d-flex flex-row-reverse">
                   <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
                 </div>
+
               </h:form>
 
               <p class="d-flex justify-content-end">
                 <small class="text-secondary">#{msgs.noDataShared}.</small>
               </p>
 
-
             </div>
           </div>
-
         </div>
       </div>
 
