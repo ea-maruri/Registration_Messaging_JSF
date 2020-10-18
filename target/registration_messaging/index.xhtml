@@ -75,10 +75,11 @@
                   <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
                   <h:message errorClass="text-danger" for="passwordConfirm_register"/>
 
-
-                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
-
                 </h:panelGrid>
+
+                <div class="d-flex flex-row-reverse">
+                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
+                </div>
               </h:form>
 
               <p class="d-flex justify-content-end">
