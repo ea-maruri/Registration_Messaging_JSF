@@ -6,94 +6,149 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-  <title>Home Messaging</title>
+  <h:head>
+    <title>#{msgs.homeTitle}}</title>
 
-  <!-- Required meta tags -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Required meta tags for Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-  <!-- Bootstrap CSS -->
-  <h:outputStylesheet library="css" name="styles.css"/>
-  <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
-</h:head>
+    <!-- Bootstrap CSS -->
+    <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
 
-<h:body>
+    <!-- Custom CSS -->
+    <h:outputStylesheet library="css" name="styles.css"/>
+  </h:head>
 
-  <!-- Title -->
-  <div class="jumbotron">
-    <h1 class="display-3">Let's Start Messaging, #{user.userName}</h1>
-    <hr class="my-2"/>
-  </div>
+  <h:body>
 
+    <f:view>
 
-  <!-- Log out button -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 d-flex justify-content-end">
-        <h:form>
-          <h:commandButton styleClass="my-2 btn-danger" value="Log out" action="#{users_list.doLogout(user)}"/>
-        </h:form>
-
-        <p class="d-flex justify-content-end">
-          <small class="text-danger">Error while doing log out.</small>
-        </p>
+      <!-- Title -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-5">#{msgs.startMessaging}, #{user.userName}</h1>
+          <hr class="my-2"/>
+        </div>
       </div>
-    </div>
-  </div>
 
 
-  <!-- Message -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 d-flex justify-content-center">
+      <!-- Log out and See messages buttons -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-end">
+            <h:form>
+              <h:commandButton styleClass="my-2 btn-primary" value="#{msgs.showMessages}" action="user-messages"/>
+              <h:commandButton styleClass="my-2 ml-5 btn-danger" value="#{msgs.logout}" action="#{users_list.doLogout(user)}"/>
+            </h:form>
 
-        <h:form>
-          <h:panelGrid columns="1">
-            <h:inputTextarea rows="9" cols="55"/>
-            <div class="d-flex flex-row-reverse">
-              <h:commandButton value="Send" styleClass="btn-success"/>
+            <p>
+              <small class="text-danger">
+                Error: cannot do log out
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Message -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-center">
+
+            <h:form>
+              <h:panelGrid columns="2">
+                #{msgs.receiverPrompt}:
+                  <h:inputText value="#{temp_message.receiver}"/>
+
+                #{msgs.messagePrompt}:
+                <h:inputTextarea value="#{temp_message.message}" rows="9" cols="55"/>
+
+                <div class="d-flex flex-row-reverse">
+                  <h:commandButton value="#{msgs.send}" styleClass="btn-success"
+                                   action="#{users_list.sendMessage(
+                                                              user.userName,
+                                                              temp_message.receiver,
+                                                              temp_message.message
+                                                           )}"/>
+                </div>
+              </h:panelGrid>
+            </h:form>
+
+          </div>
+
+
+          <!-- Is this necessary?? -->
+          <div class="col-sm-12 d-flex justify-content-center">
+            <h:form>
+              <h:inputText value="#{msgBackingBean.enteredMessage}"/>
+              <h:commandButton value="send" action="#{msgBackingBean.onSendMessage}"/>
+              <f:websocket channel="incoming">
+                <f:ajax event="newmessage" execute="@form" render="@form"/>
+              </f:websocket>
+              <ui:repeat value="#{msgBackingBean.messages}" var="msg">
+                <h:outputText value="" /> one #{msg}
+              </ui:repeat>
+            </h:form>
+          </div>
+
+        </div>
+      </div>
+
+
+      <hr class="my-2"/>
+
+
+      <!-- List of users -->
+      <div class="container mb-5">
+        <div class="row">
+          <!-- Logged users -->
+          <div class="col-md-6">
+            <h3>Logged Users:</h3>
+
+            <div class="col-md-6 d-flex justify-content-center">
+              <h:form>
+                <h:commandButton value="send" action="#{msgBackingBean.getList}"/>
+                <f:websocket channel="incoming">
+                  <f:ajax event="newmessage" execute="@form" render="@form"/>
+                </f:websocket>
+                <ui:repeat value="#{users_list.loggedUsers}" var="msg">
+                  <h:outputText value="" /> #{msg}
+                </ui:repeat>
+              </h:form>
             </div>
-          </h:panelGrid>
-        </h:form>
+          </div>
 
+
+
+
+          <!-- Registered users -->
+          <div class="col-md-6">
+            <h3>Registered Users:</h3>
+
+            <div class="col-md-6 d-flex justify-content-center">
+              <h:form>
+                <h:commandButton value="send" action="#{msgBackingBean.getRegistered}"/>
+                <f:websocket channel="incoming">
+                  <f:ajax event="newmessage1" execute="@form" render="@form"/>
+                </f:websocket>
+                <ui:repeat value="#{users_list.registeredUsers}" var="msg">
+                  <h:outputText value="" /> #{msg}
+                </ui:repeat>
+              </h:form>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </f:view>
 
 
-  <hr class="my-2"/>
 
-
-  <!-- List of users -->
-  <div class="container mb-5">
-    <div class="row">
-      <!-- Logged users -->
-      <div class="col-sm-12 col-md-6">
-        <h3>Logged Users:</h3>
-
-        <p class="text-primary">
-          #{users_list.loggedUsers}
-        </p>
-      </div>
-
-
-      <!-- Registered users -->
-      <div class="col-sm-12 col-md-6">
-        <h3>Registered Users:</h3>
-
-        <p class="text-success">
-          #{users_list.registeredUsers}
-        </p>
-
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <h:outputScript library="javascript" name="jquery.js"/>
-  <h:outputScript library="css" name="bootstrap-4.5.2-dist/js/bootstrap.min.js"/>
-</h:body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <h:outputScript library="javascript" name="jquery.js"/>
+    <h:outputScript library="css" name="bootstrap-4.5.2-dist/js/bootstrap.min.js"/>
+  </h:body>
 
 </html>

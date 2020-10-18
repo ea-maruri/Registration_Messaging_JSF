@@ -7,90 +7,100 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
   <h:head>
-    <title>#{msgs.indexHeadTitle}</title>
+    <title>#{msgs.register}</title>
 
-    <!-- Required meta tags -->
+    <!-- Required meta tags for Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Bootstrap CSS -->
-    <h:outputStylesheet library="css" name="styles.css"/>
     <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <h:outputStylesheet library="css" name="styles.css"/>
   </h:head>
 
   <h:body>
-    <!-- Welcome -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-3">#{msgs.indexTitle}</h1>
-        <p class="lead">#{msgs.indexSubTitle}...</p>
-        <hr class="my-2"/>
-      </div>
-    </div>
 
+    <!-- Creates a JSF View, which is a container that holds all of the components that are part of the view. -->
+    <f:view>
 
-    <!-- Login button -->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 d-flex justify-content-end">
-          <h:form>
-            <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="login"/>
-          </h:form>
+      <!-- Welcome -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">#{msgs.welcome}</h1>
+          <p class="lead">#{msgs.indexSubTitle}...</p>
+          <hr class="my-2"/>
         </div>
       </div>
-    </div>
 
 
-    <!-- Register Form -->
-    <div class="container d-flex justify-content-center">
-      <div class="row">
-
-        <!-- Register -->
-        <div class="col-sm-12 col-md-12">
-          <h2 class="text-center">#{msgs.register}</h2>
-
-          <!-- Form -->
-          <div class="form-group">
+      <!-- Login button -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-end">
             <h:form>
-              <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
-
-                #{msgs.indexFormName}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{user_interpreter.name}" id="name_register"/>
-                  <h:messages errorClass="text-danger" for="name_register"/>
-
-                #{msgs.indexFormUserName}:
-                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{user_interpreter.userName}" id="username_register"/>
-                  <h:messages errorClass="text-danger" for="username_register"/>
-
-                #{msgs.indexFormPassword}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{user_interpreter.password}" id="password_register"/>
-                <h:messages errorClass="text-danger" for="password_register"/>
-
-                #{msgs.indexFormConfirmPassword}:
-                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{user_interpreter.confirmPassword}" id="passwordConfirm_register"/>
-                  <h:messages errorClass="text-danger" for="passwordConfirm_register"/>
-
-
-                <h:commandButton styleClass="my-2 btn-success" value="Reigister" action="#{users_list.registerAUser(user_interpreter)}"/>
-
-              </h:panelGrid>
+              <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="login"/>
             </h:form>
-
-            <p class="d-flex justify-content-end">
-              <small class="text-muted">#{msgs.noDataShared}.</small>
-            </p>
-
           </div>
         </div>
-
       </div>
-    </div>
 
 
-    <hr class="my-2"/>
+      <!-- Register Form -->
+      <div class="container d-flex justify-content-center">
+        <div class="row">
+
+          <!-- Register -->
+          <div class="col-sm-12 col-md-12">
+            <h2 class="text-center">#{msgs.register}</h2>
+
+            <!-- Form -->
+            <div class="form-group">
+              <h:form>
+                <h:panelGrid columns="3" columnClasses="evenColumns, oddColumns">
+
+                  #{msgs.namePrompt}:
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.name}" id="name_register"/>
+                  <h:message errorClass="text-danger" for="name_register"/>
+
+                  #{msgs.userNamePrompt}:
+                  <h:inputText required="true" styleClass="my-2 ml-2" value="#{temp_user.userName}" id="username_register"/>
+                  <h:message errorClass="text-danger" for="username_register"/>
+
+                  #{msgs.passwordPrompt}:
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.password}" id="password_register"/>
+                  <h:message errorClass="text-danger" for="password_register"/>
+
+                  #{msgs.confirmPasswordPrompt}:
+                  <h:inputSecret required="true" styleClass="my-2 ml-2" value="#{temp_user.confirmPassword}" id="passwordConfirm_register"/>
+                  <h:message errorClass="text-danger" for="passwordConfirm_register"/>
+
+
+                  <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="#{users_list.registerAUser(temp_user)}"/>
+
+                </h:panelGrid>
+              </h:form>
+
+              <p class="d-flex justify-content-end">
+                <small class="text-secondary">#{msgs.noDataShared}.</small>
+              </p>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <hr class="my-2"/>
+
+    </f:view>
 
 
     <h:outputScript library="javascript" name="jquery.js"/>
     <h:outputScript library="css" name="bootstrap-4.5.2-dist/js/bootstrap.min.js"/>
 
   </h:body>
+
 </html>

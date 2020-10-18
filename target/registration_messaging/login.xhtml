@@ -7,76 +7,82 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
   <h:head>
-    <title>Welcome to Messaging</title>
+    <title>#{msgs.login}</title>
 
-    <!-- Required meta tags -->
+    <!-- Required meta tags for Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Bootstrap CSS -->
-    <h:outputStylesheet library="css" name="styles.css"/>
     <h:outputStylesheet library="css" name="bootstrap-4.5.2-dist/css/bootstrap.min.css"/>
+
+    <!-- Custom CSS -->
+    <h:outputStylesheet library="css" name="styles.css"/>
   </h:head>
 
   <h:body>
-    <!-- Welcome -->
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-3">Welcome to Messaging</h1>
-        <p class="lead">Please, do login...</p>
-        <hr class="my-2"/>
-      </div>
-    </div>
 
+    <f:view>
 
-    <!-- Register button -->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12 d-flex justify-content-end">
-          <h:form>
-            <h:commandButton styleClass="my-2 btn-success" value="Register" action="index"/>
-          </h:form>
+      <!-- Welcome -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">#{msgs.welcome}</h1>
+          <p class="lead">#{msgs.doLoginSubtitle}...</p>
+          <hr class="my-2"/>
         </div>
       </div>
-    </div>
 
 
-    <!-- Login Form -->
-    <div class="container d-flex justify-content-center">
-      <div class="row">
-
-        <!-- Login -->
-        <div class="col-sm-12 col-md-12">
-          <h2 class="text-center">Login</h2>
-
-          <!-- Form -->
-          <div class="form-group">
+      <!-- Register button -->
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 d-flex justify-content-end">
             <h:form>
-              <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
-                User name: <h:inputText styleClass="my-2 ml-2" value="#{user_interpreter.userName}" id="username_login"/>
-                Password: <h:inputText styleClass="my-2 ml-2" value="#{user_interpreter.password}" id="password_login"/>
-
-                <!--
-                <h:commandButton value="Register">
-                  <f:ajax execute="name username password" render="out"/>
-                </h:commandButton>
-                -->
-
-                <h:commandButton styleClass="my-2 btn-warning" value="Login" action="#{users_list.doLogin(user_interpreter, user)}"/>
-
-              </h:panelGrid>
+              <h:commandButton styleClass="my-2 btn-success" value="#{msgs.register}" action="index"/>
             </h:form>
           </div>
         </div>
-
       </div>
-    </div>
 
 
-    <hr class="my-2"/>
-    <h:outputScript>
-      console.log(user_interpreter)
-    </h:outputScript>
+      <!-- Login Form -->
+      <div class="container d-flex justify-content-center">
+        <div class="row">
 
+          <!-- Login -->
+          <div class="col-sm-12 col-md-12">
+            <h2 class="text-center">Login</h2>
+
+            <!-- Form -->
+            <div class="form-group">
+              <h:form>
+                <h:panelGrid columns="2" columnClasses="evenColumns, oddColumns">
+                  #{msgs.userNamePrompt}:
+                    <h:inputText styleClass="my-2" value="#{temp_user.userName}" id="username_login"/>
+                  #{msgs.passwordPrompt}:
+                    Password <h:inputSecret styleClass="my-2" value="#{temp_user.password}" id="password_login"/>
+
+                  <!--
+                  <h:commandButton value="Register">
+                    <f:ajax execute="name username password" render="out"/>
+                  </h:commandButton>
+                  -->
+
+                  <h:commandButton styleClass="my-2 btn-warning" value="#{msgs.login}" action="#{users_list.doLogin(temp_user, user)}"/>
+
+                </h:panelGrid>
+              </h:form>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <hr class="my-2"/>
+
+    </f:view>
 
 
     <h:outputScript library="javascript" name="jquery.js"/>
