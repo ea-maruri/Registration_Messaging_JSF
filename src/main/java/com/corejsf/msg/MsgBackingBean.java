@@ -19,8 +19,8 @@ public class MsgBackingBean implements Serializable {
     @Push
     private PushContext incoming;
 
-    @Push
-    private PushContext logged_in_users;
+/*    @Push
+    private PushContext logged_in_users;*/
 
     private String enteredMessage;
 
@@ -32,17 +32,21 @@ public class MsgBackingBean implements Serializable {
 //        msgService.add(enteredMessage);
 //        incoming.send("newmessage");
 //    }
+
     public void getList() {
         incoming.send("newmessage");
     }
+
     public void getRegistered() {
         incoming.send("newmessage1");
     }
-    // Getter
+
+    // Sender
     public void setEnteredMessage(String inputMessage){
         enteredMessage = inputMessage;
     }
 
+    // Getter
     public String getEnteredMessage(){
         return enteredMessage;
     }

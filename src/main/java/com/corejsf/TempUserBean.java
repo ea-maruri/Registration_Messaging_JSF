@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * @author EAMT on 3/10/2020
  */
-@Named("temp_user")
+@Named("tempUser")
 @RequestScoped
 public class TempUserBean implements Serializable {
     // Instance Variables
@@ -104,4 +104,5 @@ public class TempUserBean implements Serializable {
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
+
 }

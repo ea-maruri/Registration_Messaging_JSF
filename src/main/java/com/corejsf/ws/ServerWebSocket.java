@@ -13,7 +13,14 @@ import java.util.Set;
 @ServerEndpoint("/push")
 public class ServerWebSocket {
 
+    // Instance Variable
     private Set<Session> sessions = new HashSet<>();
+
+    //Getter
+    public Set<Session> getSessions() {
+        return this.sessions;
+    }
+
 
     @OnOpen
     public void open(Session session) {

@@ -13,18 +13,18 @@ public class TempMessage implements Serializable {
     private String receiver;
     private String message;
 
+    // Getters
     public String getReceiver() {
         return receiver;
     }
-
-    public void setReceiver(String receiver) {
-        this.receiver = receiver;
-    }
-
     public String getMessage() {
         return message;
     }
 
+    // Setters
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
     public void setMessage(String message) {
         this.message = message;
     }

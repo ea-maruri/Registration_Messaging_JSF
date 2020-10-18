@@ -9,9 +9,9 @@ import java.util.Objects;
 /**
  * @author EAMT on 3/10/2020
  */
-@Named("user")
+@Named("currentUser")
 @SessionScoped
-public class UserBean implements Serializable {
+public class CurrentUserBean implements Serializable {
     // Instance Variables
     protected String name = "";
     protected String userName = "";
@@ -77,8 +77,8 @@ public class UserBean implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserBean userBean = (UserBean) o;
-        return name.equals(userBean.name) && userName.equals(userBean.userName) && password.equals(userBean.password);
+        CurrentUserBean currentUserBean = (CurrentUserBean) o;
+        return name.equals(currentUserBean.name) && userName.equals(currentUserBean.userName) && password.equals(currentUserBean.password);
     }
 
     @Override

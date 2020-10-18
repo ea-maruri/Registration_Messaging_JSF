@@ -14,20 +14,20 @@ import java.util.List;
 /**
  * @author EAMT on 3/10/2020
  */
-@Named("users_list")
+@Named("usersManager")
 @ApplicationScoped
 
-public class UsersListBean implements Serializable {
+public class UsersManagerBean implements Serializable {
     /**
      * Instance Variables
      * <strong><em>registeredUsers</em></strong>, type: HashMap
      * <strong><em>loggedUsers</em></strong>, type: List
      */
     private final HashMap<String, TempUserBean> registeredUsers = new HashMap<>();
-    private List<UserBean> loggedUsers = new ArrayList<>();
+    private List<CurrentUserBean> loggedUsers = new ArrayList<>();
 
 
-    public UsersListBean getInstance() {
+    public UsersManagerBean getInstance() {
        return this;
     }
 
@@ -37,7 +37,7 @@ public class UsersListBean implements Serializable {
      * Returns loggedUsers instance variable
      * @return List
      */
-    public List<UserBean> getLoggedUsers() {
+    public List<CurrentUserBean> getLoggedUsers() {
         return loggedUsers;
     }
 
@@ -45,12 +45,12 @@ public class UsersListBean implements Serializable {
      * Set loggedUsers given a <strong>list</strong>
      * @param loggedUsers List
      */
-    public void setLoggedUsers(List<UserBean> loggedUsers) {
+    public void setLoggedUsers(List<CurrentUserBean> loggedUsers) {
         this.loggedUsers = loggedUsers;
     }
 
     /**
-     * Returns a HashMap of users (from UserBean class): registeredUsers
+     * Returns a HashMap of users (from CurrentUserBean class): registeredUsers
      * @return HashMap
      */
     public HashMap<String, TempUserBean> getRegisteredUsers() {
@@ -69,7 +69,7 @@ public class UsersListBean implements Serializable {
         System.out.println("User from front end: " + user.toString());
 
         if(user.getPassword().equals(user.getConfirmPassword())){
-//            UserBean userToRegister = new UserBean();
+//            CurrentUserBean userToRegister = new CurrentUserBean();
 //            userToRegister.setName(user.getName());
 //            userToRegister.setUserName(user.getUserName());
 //            userToRegister.setPassword(user.getPassword());
@@ -99,7 +99,7 @@ public class UsersListBean implements Serializable {
      * @param user TempUserBean
      * @return String, success or failure (an outcome)
      */
-    public String doLogin(TempUserBean user, UserBean userBean) {
+    public String doLogin(TempUserBean user, CurrentUserBean currentUserBean) {
         System.out.println("Doing a Login...");
         if (this.registeredUsers.containsKey(user.getUserName())) {
             TempUserBean data = this.registeredUsers.get(user.getUserName());
@@ -109,12 +109,12 @@ public class UsersListBean implements Serializable {
                     System.out.println(OPS_STATUS.SUCCESS);
                     return "failure";
                 }else {
-                    userBean.setName(data.getName());
-                    userBean.setUserName(data.getUserName());
-                    userBean.setPassword(data.getPassword());
-                    userBean.setLogged(true);
-                    System.out.println("This is registered user info: " + userBean.toString());
-                    this.loggedUsers.add(userBean);
+                    currentUserBean.setName(data.getName());
+                    currentUserBean.setUserName(data.getUserName());
+                    currentUserBean.setPassword(data.getPassword());
+                    currentUserBean.setLogged(true);
+                    System.out.println("This is registered user info: " + currentUserBean.toString());
+                    this.loggedUsers.add(currentUserBean);
                     System.out.println(OPS_STATUS.SUCCESS);
 //
 //                    MsgBackingBean msgBackingBean = new MsgBackingBean();
@@ -131,11 +131,11 @@ public class UsersListBean implements Serializable {
 
     /**
      * Remove a user from loggedUsers and set logged = false
-     * @param user UserBean
+     * @param user CurrentUserBean
      * @return String, success or failure (an outcome)
      */
 
-    public String doLogout(UserBean user) {
+    public String doLogout(CurrentUserBean user) {
         System.out.println("Doing a Logout...");
         System.out.println(user.toString());
         System.out.println("This is user logged status: " + user.isLogged());
