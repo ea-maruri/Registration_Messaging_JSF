@@ -1,11 +1,8 @@
 package com.corejsf;
 
 import com.corejsf.msg.Message;
-import com.corejsf.msg.MsgBackingBean;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.faces.push.Push;
-import javax.faces.push.PushContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class UsersListBean implements Serializable {
      * <strong><em>registeredUsers</em></strong>, type: HashMap
      * <strong><em>loggedUsers</em></strong>, type: List
      */
-    private final HashMap<String, UserBeanInterpreter> registeredUsers = new HashMap<>();
+    private final HashMap<String, TempUserBean> registeredUsers = new HashMap<>();
     private List<UserBean> loggedUsers = new ArrayList<>();
 
 
@@ -56,7 +53,7 @@ public class UsersListBean implements Serializable {
      * Returns a HashMap of users (from UserBean class): registeredUsers
      * @return HashMap
      */
-    public HashMap<String, UserBeanInterpreter> getRegisteredUsers() {
+    public HashMap<String, TempUserBean> getRegisteredUsers() {
         return registeredUsers;
     }
 
@@ -64,10 +61,10 @@ public class UsersListBean implements Serializable {
     // Methods
     /**
      * Add to registeredUsers a user if follows all rules and everything is OK
-     * @param user UserBeanInterpreter
+     * @param user TempUserBean
      * @return String, success or failure (outcome)
      */
-    public String registerAUser(UserBeanInterpreter user) {
+    public String registerAUser(TempUserBean user) {
         System.out.println("Doing a register...");
         System.out.println("User from front end: " + user.toString());
 
@@ -99,13 +96,13 @@ public class UsersListBean implements Serializable {
     /**
      * Add a <strong>registered</strong> user (in registeredUsers) to loggedUsers.
      * set logged = true
-     * @param user UserBeanInterpreter
+     * @param user TempUserBean
      * @return String, success or failure (an outcome)
      */
-    public String doLogin(UserBeanInterpreter user, UserBean userBean) {
+    public String doLogin(TempUserBean user, UserBean userBean) {
         System.out.println("Doing a Login...");
         if (this.registeredUsers.containsKey(user.getUserName())) {
-            UserBeanInterpreter data = this.registeredUsers.get(user.getUserName());
+            TempUserBean data = this.registeredUsers.get(user.getUserName());
             if (data.getPassword().equals(user.getPassword())) {
                 if(user.isLogged()) {
                     System.out.println("User is logged");
@@ -155,8 +152,8 @@ public class UsersListBean implements Serializable {
 
 
 
-    public UserBeanInterpreter getUserByName(String userName) {
-        UserBeanInterpreter user;
+    public TempUserBean getUserByName(String userName) {
+        TempUserBean user;
         user = this.registeredUsers.getOrDefault(userName, null);
 
         System.out.println("Try to return " + user + ". Received name: " + userName);
@@ -166,14 +163,14 @@ public class UsersListBean implements Serializable {
 
 
     public void sendMessage(String sender, String receiver, String msgText) {
-        UserBeanInterpreter userBeanInterpreter = this.getUserByName(receiver);
-        if (userBeanInterpreter != null) {
-            System.out.printf("Messages of %s: %s\n", userBeanInterpreter, userBeanInterpreter.getMessagesList());
-            System.out.println("Send message to " + userBeanInterpreter);
+        TempUserBean tempUserBean = this.getUserByName(receiver);
+        if (tempUserBean != null) {
+            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessagesList());
+            System.out.println("Send message to " + tempUserBean);
 
             Message message = new Message(Calendar.getInstance().getTime(), sender, receiver, msgText);
-            userBeanInterpreter.getMessagesList().add(message);
-            System.out.printf("Messages of %s: %s\n", userBeanInterpreter, userBeanInterpreter.getMessagesList());
+            tempUserBean.getMessagesList().add(message);
+            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessagesList());
         }
         else {
             System.out.println("Cannot send message because received is null");
@@ -184,7 +181,7 @@ public class UsersListBean implements Serializable {
 
     public String getUserMessages(String userName) {
         if (this.registeredUsers.containsKey(userName)) {
-            UserBeanInterpreter user = this.registeredUsers.get(userName);
+            TempUserBean user = this.registeredUsers.get(userName);
             StringBuilder sb = new StringBuilder();
             for (Message msg : user.getMessagesList()) {
                 sb.append(msg).append("\n");

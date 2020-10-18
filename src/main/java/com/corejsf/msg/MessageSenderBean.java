@@ -1,13 +1,12 @@
 
 package com.corejsf.msg;
 
-import com.corejsf.UserBeanInterpreter;
+import com.corejsf.TempUserBean;
 import com.corejsf.UsersListBean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * @author EAMT on 17/10/2020
@@ -28,13 +27,13 @@ public class MessageSenderBean {
 
 
     public void sendMessage(String sender, String receiver, String msgText) {
-        UserBeanInterpreter userBeanInterpreter = usersListBean.getUserByName(receiver);
-        if (userBeanInterpreter != null) {
-            System.out.println("Send message to " + userBeanInterpreter);
+        TempUserBean tempUserBean = usersListBean.getUserByName(receiver);
+        if (tempUserBean != null) {
+            System.out.println("Send message to " + tempUserBean);
 
             Message message = new Message(Calendar.getInstance().getTime(), sender, receiver, msgText);
-            userBeanInterpreter.getMessagesList().add(message);
-            System.out.printf("Messages of %s: %s\n", userBeanInterpreter, userBeanInterpreter.getMessagesList());
+            tempUserBean.getMessagesList().add(message);
+            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessagesList());
             System.out.println("HERE");
         }
         else {
@@ -44,7 +43,7 @@ public class MessageSenderBean {
     }
 
 //    public void sendMessage(Message message) {
-//        UserBeanInterpreter userBeanInterpreter = usersListBean.getUserByName(message.getReceiver());
+//        TempUserBean userBeanInterpreter = usersListBean.getUserByName(message.getReceiver());
 //
 //        userBeanInterpreter.getMessagesList().add(message);
 //
