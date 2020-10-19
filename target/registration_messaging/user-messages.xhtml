@@ -24,7 +24,17 @@
 
     <h:body>
 
-      <div class="container">
+      <!-- Title -->
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Messages #{currentUser.userName}</h1>
+          <hr class="my-2"/>
+        </div>
+      </div>
+
+
+      <!-- Home Button -->
+      <div class="container mt-1">
         <div class="row">
           <div class="col d-flex">
             <div>
@@ -38,35 +48,49 @@
         </div>
       </div>
 
+
+      <hr class="mb-5 mt-3"/>
+
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <!--        <ul>-->
-            <!--          <c:forEach items="#{users_list.getUserMessages(user.userName)}" var="message">-->
-            <!--            <li>-->
-            <!--              <h:outputText value="#{message}"/>-->
-            <!--            </li>-->
-            <!--          </c:forEach>-->
-            <!--        </ul>-->
-            <p>
-              #{usersManager.getUserMessages(currentUser.userName)}
-            </p>
+            <ul>
+              <ui:repeat value="#{usersManager.getMessagesAsList(currentUser.userName)}" var="message">
+                <li>
+                  <h:outputText value="#{message}"/>
+                </li>
+              </ui:repeat>
+            </ul>
+
+<!--            <p>-->
+<!--              #{usersManager.getUserMessages(currentUser.userName)}-->
+<!--            </p>-->
           </div>
         </div>
       </div>
 
+
       <hr class="my-2"/>
 
-      <div class="container">
+
+      <!-- Remove Messages form -->
+      <div class="container mt-3">
         <div class="row">
           <div class="col">
             <h:form>
               <h:panelGrid columns="3">
                 <strong>#{msgs.messageIdPrompt}:</strong>
-                <h:inputText/>
-                <h:commandButton styleClass="btn-danger" value="#{msgs.remove}"/>
+                <h:inputText required="true" value="#{messageToRemove.id}"/>
+                <h:commandButton styleClass="btn-danger" value="#{msgs.remove}"
+                                 action="#{usersManager.removeMessage(currentUser.userName, messageToRemove.id)}"/>
               </h:panelGrid>
             </h:form>
+
+            <p>
+              <small class="text-muted">
+                #{msgs.removeMessageHelp}.
+              </small>
+            </p>
           </div>
         </div>
       </div>
