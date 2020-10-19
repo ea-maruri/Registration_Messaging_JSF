@@ -75,6 +75,9 @@ public class UsersManagerBean implements Serializable {
 //            userToRegister.setPassword(user.getPassword());
 
             if (this.registeredUsers.putIfAbsent(user.getUserName(), user) == null) {
+                // Initialize the HashMap
+                this.registeredUsers.get(user.getUserName()).setMessages(new HashMap<>());
+
                 System.out.println(OPS_STATUS.SUCCESS);
                 System.out.println(user.toString());
                 return "success";
@@ -134,7 +137,6 @@ public class UsersManagerBean implements Serializable {
      * @param user CurrentUserBean
      * @return String, success or failure (an outcome)
      */
-
     public String doLogout(CurrentUserBean user) {
         System.out.println("Doing a Logout...");
         System.out.println(user.toString());
@@ -152,6 +154,25 @@ public class UsersManagerBean implements Serializable {
 
 
 
+    public void removeMessage(String userName, int messageId) {
+        if (this.registeredUsers.containsKey(userName)) {
+            TempUserBean user = this.registeredUsers.get(userName);
+
+            if (user.getMessages().containsKey(messageId)) {
+                System.out.printf("Try to remove %d of %s\n", messageId, userName);
+                user.getMessages().remove(messageId);
+                System.out.printf("Message %d of %s removed!\n", messageId, userName);
+            }
+            else {
+                System.err.printf("Message id (%d) does not exist\n", messageId);
+            }
+        }
+        else {
+            System.err.printf("User %s does not exist\n", userName);
+        }
+    }
+
+
     public TempUserBean getUserByName(String userName) {
         TempUserBean user;
         user = this.registeredUsers.getOrDefault(userName, null);
@@ -165,12 +186,13 @@ public class UsersManagerBean implements Serializable {
     public void sendMessage(String sender, String receiver, String msgText) {
         TempUserBean tempUserBean = this.getUserByName(receiver);
         if (tempUserBean != null) {
-            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessagesList());
+            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessages());
             System.out.println("Send message to " + tempUserBean);
 
             Message message = new Message(Calendar.getInstance().getTime(), sender, receiver, msgText);
-            tempUserBean.getMessagesList().add(message);
-            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessagesList());
+            tempUserBean.getMessages().put(message.hashCode(), message);
+            //tempUserBean.getMessagesList().add(message);
+            System.out.printf("Messages of %s: %s\n", tempUserBean, tempUserBean.getMessages());
         }
         else {
             System.out.println("Cannot send message because received is null");
@@ -179,13 +201,34 @@ public class UsersManagerBean implements Serializable {
     }
 
 
+    public List<Message> getMessagesAsList(String userName) {
+        List<Message> messagesAsList = new ArrayList<>();
+
+        if(this.registeredUsers.containsKey(userName)) {
+            TempUserBean user = this.registeredUsers.get(userName);
+            for (Integer id : user.getMessages().keySet()) {
+                messagesAsList.add(user.getMessages().get(id));
+            }
+        }
+        else {
+            System.err.printf("User \"%s\" does not exist\n", userName);
+        }
+
+
+        return messagesAsList;
+    }
+
+
     public String getUserMessages(String userName) {
         if (this.registeredUsers.containsKey(userName)) {
             TempUserBean user = this.registeredUsers.get(userName);
             StringBuilder sb = new StringBuilder();
-            for (Message msg : user.getMessagesList()) {
-                sb.append(msg).append("\n");
+            for (Integer id : user.getMessages().keySet()) {
+                sb.append(user.getMessages().get(id));
             }
+            /*for (Message msg : user.getMessagesList()) {
+                sb.append(msg).append("\n");
+            }*/
 
             return sb.toString();
         }
@@ -226,4 +269,5 @@ public class UsersManagerBean implements Serializable {
             return "status='" + getStatus() + '\'';
         }
     }
+
 }

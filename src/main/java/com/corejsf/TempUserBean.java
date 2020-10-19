@@ -6,6 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class TempUserBean implements Serializable {
     protected boolean logged = false;
     private String confirmPassword;
 
-    private List<Message> messagesList = new ArrayList<>();
+    private HashMap<Integer, Message> messages = new HashMap<>();
 
 
     // Getters and Setters
@@ -58,20 +59,29 @@ public class TempUserBean implements Serializable {
         this.logged = logged;
     }
 
-
-    public List<Message> getMessagesList() {
-        return messagesList;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setMessagesList(List<Message> messagesList) {
-        this.messagesList = messagesList;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
+
+    public HashMap<Integer, Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(HashMap<Integer, Message> messages) {
+        this.messages = messages;
+    }
+
 
     // Extra
-
     public void putLogged(boolean logged){
         setLogged(logged);
     }
+
+
 
     // From Object
     @Override
@@ -95,14 +105,6 @@ public class TempUserBean implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(name, userName, password);
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
 }
