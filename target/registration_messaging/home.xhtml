@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
   <h:head>
-    <title>#{msgs.homeTitle}}</title>
+    <title>#{msgs.homeTitle}</title>
 
     <!-- Required meta tags for Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -26,7 +26,7 @@
       <!-- Title -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-5">#{msgs.startMessaging}, #{currentUser.userName}</h1>
+          <h1 class="display-4">#{msgs.startMessaging}, #{currentUser.userName}</h1>
           <hr class="my-2"/>
         </div>
       </div>
@@ -102,7 +102,7 @@
         <div class="row">
           <!-- Logged users -->
           <div class="col-md-6">
-            <h3>Logged Users:</h3>
+            <h3>#{msgs.loggedUsersPrompt}:</h3>
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
@@ -110,9 +110,15 @@
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage" execute="@form" render="@form"/>
                 </f:websocket>
-                <ui:repeat value="#{usersManager.loggedUsers}" var="msg">
-                  <h:outputText value="" /> #{msg}
-                </ui:repeat>
+
+                <ul>
+                  <ui:repeat value="#{usersManager.loggedUsers}" var="loggedUser">
+                    <li>
+                      <h:outputText value="" /> #{loggedUser}
+                    </li>
+                  </ui:repeat>
+                </ul>
+
               </h:form>
             </div>
           </div>
@@ -121,7 +127,7 @@
 
           <!-- Registered users -->
           <div class="col-md-6">
-            <h3>Registered Users:</h3>
+            <h3>#{msgs.registeredUsersPrompt}:</h3>
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
@@ -129,9 +135,14 @@
                 <f:websocket channel="incoming">
                   <f:ajax event="newmessage1" execute="@form" render="@form"/>
                 </f:websocket>
-                <ui:repeat value="#{usersManager.registeredUsers}" var="msg">
-                  <h:outputText value="" /> #{msg}
-                </ui:repeat>
+
+                <ul>
+                  <ui:repeat value="#{usersManager.registeredUsers}" var="registeredUser">
+                    <li>
+                      <h:outputText value="" /> #{registeredUser}
+                    </li>
+                  </ui:repeat>
+                </ul>
               </h:form>
             </div>
 
