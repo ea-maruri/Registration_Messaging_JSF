@@ -113,7 +113,7 @@
 
                 <ul>
                   <ui:repeat value="#{usersManager.loggedUsers}" var="loggedUser">
-                    <li>
+                    <li class="text-success">
                       <h:outputText value="" /> #{loggedUser}
                     </li>
                   </ui:repeat>
@@ -138,7 +138,7 @@
 
                 <ul>
                   <ui:repeat value="#{usersManager.registeredUsers}" var="registeredUser">
-                    <li>
+                    <li class="text-primary">
                       <h:outputText value="" /> #{registeredUser}
                     </li>
                   </ui:repeat>
