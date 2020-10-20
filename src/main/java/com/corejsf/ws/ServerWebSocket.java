@@ -14,7 +14,7 @@ import java.util.Set;
 public class ServerWebSocket {
 
     // Instance Variable
-    private Set<Session> sessions = new HashSet<>();
+    private final Set<Session> sessions = new HashSet<>();
 
     //Getter
     public Set<Session> getSessions() {
