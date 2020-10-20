@@ -1,7 +1,8 @@
-package com.corejsf.msg;
+package com.corejsf.ws;
 
 import com.corejsf.CurrentUserBean;
 import com.corejsf.TempUserBean;
+import com.corejsf.msg.MessageService;
 
 import javax.ejb.EJB;
 import javax.faces.push.Push;
@@ -16,22 +17,13 @@ import java.util.List;
 
 @Named
 @ViewScoped
-public class MsgBackingBean implements Serializable {
-    @EJB
+public class UsersBackingBean implements Serializable {
+    /*@EJB
     private MessageService msgService;
-    @Inject
+    @Inject*/
 
     @Push
     private PushContext incoming;  // channel
-
-    private final HashMap<String, TempUserBean> registeredUsers = new HashMap<>();
-    private List<CurrentUserBean> loggedUsers = new ArrayList<>();
-
-
-
-    private void addRegisteredUser() {
-
-    }
 
 
     public void getLoggedUsersList() {

@@ -91,7 +91,7 @@
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getLoggedUsersList()}"/>
+                <h:commandButton value="#{msgs.send}" action="#{usersBackingBean.getLoggedUsersList()}"/>
 
                 <f:websocket channel="incoming">
                   <f:ajax event="loggedUsersList" execute="@form" render="@form"/>
@@ -116,7 +116,7 @@
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getRegisteredUsers()}"/>
+                <h:commandButton value="#{msgs.send}" action="#{usersBackingBean.getRegisteredUsers()}"/>
                 <f:websocket channel="incoming">
                   <f:ajax event="registeredUsersList" execute="@form" render="@form"/>
                 </f:websocket>
