@@ -9,6 +9,7 @@ import java.util.List;
 public class MessageService {
     private List<String> messages;
 
+
     @PostConstruct
     private void init() {
         messages = new ArrayList<>();
@@ -19,4 +20,5 @@ public class MessageService {
     public List<String> getMessages(){
         return messages;
     }
+
 }
