@@ -2,7 +2,8 @@
 
 **JSF Basic Webb App**
 
-A Simple Web Application for registration, login and messages sending
+A Simple Web Application for registration, login and messages sending.
+**Used IDE:** IntelliJ Idea
 
 ---
 

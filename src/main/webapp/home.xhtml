@@ -74,6 +74,22 @@
             </h:form>
 
           </div>
+
+
+          <!-- Is this necessary?? -->
+          <div class="col-sm-12 d-flex justify-content-center">
+            <h:form>
+              <h:inputText value="#{msgBackingBean.enteredMessage}"/>
+              <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.onSendMessage}"/>
+              <f:websocket channel="incoming">
+                <f:ajax event="newmessage" execute="@form" render="@form"/>
+              </f:websocket>
+              <ui:repeat value="#{msgBackingBean.messages}" var="msg">
+                <h:outputText value="" /> one #{msg}
+              </ui:repeat>
+            </h:form>
+          </div>
+
         </div>
       </div>
 
