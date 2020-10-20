@@ -27,11 +27,6 @@ public class UsersManagerBean implements Serializable {
     private List<CurrentUserBean> loggedUsers = new ArrayList<>();
 
 
-    public UsersManagerBean getInstance() {
-       return this;
-    }
-
-
     /*Getters and Setters*/
     /**
      * Returns loggedUsers instance variable
@@ -41,6 +36,7 @@ public class UsersManagerBean implements Serializable {
         return loggedUsers;
     }
 
+
     /**
      * Set loggedUsers given a <strong>list</strong>
      * @param loggedUsers List
@@ -48,6 +44,7 @@ public class UsersManagerBean implements Serializable {
     public void setLoggedUsers(List<CurrentUserBean> loggedUsers) {
         this.loggedUsers = loggedUsers;
     }
+
 
     /**
      * Returns a HashMap of users (from CurrentUserBean class): registeredUsers
@@ -75,7 +72,7 @@ public class UsersManagerBean implements Serializable {
 //            userToRegister.setPassword(user.getPassword());
 
             if (this.registeredUsers.putIfAbsent(user.getUserName(), user) == null) {
-                // Initialize the HashMap
+                // Initialize the HashMap associated with the user
                 this.registeredUsers.get(user.getUserName()).setMessages(new HashMap<>());
 
                 System.out.println(OPS_STATUS.SUCCESS);
@@ -121,7 +118,7 @@ public class UsersManagerBean implements Serializable {
                     System.out.println(OPS_STATUS.SUCCESS);
 //
 //                    MsgBackingBean msgBackingBean = new MsgBackingBean();
-//                    msgBackingBean.getList();
+//                    msgBackingBean.getLoggedUsers();
                     return "success";
                 }
 
@@ -153,13 +150,16 @@ public class UsersManagerBean implements Serializable {
     }
 
 
-
+    /**
+     * Remove a message given the user and the message id
+     * @param userName String
+     * @param messageId int
+     */
     public void removeMessage(String userName, int messageId) {
         if (this.registeredUsers.containsKey(userName)) {
             TempUserBean user = this.registeredUsers.get(userName);
 
             if (user.getMessages().containsKey(messageId)) {
-                System.out.printf("Try to remove %d of %s\n", messageId, userName);
                 user.getMessages().remove(messageId);
                 System.out.printf("Message %d of %s removed!\n", messageId, userName);
             }
@@ -173,9 +173,13 @@ public class UsersManagerBean implements Serializable {
     }
 
 
+    /**
+     * Returns a user given its name
+     * @param userName String
+     * @return TempUserBean
+     */
     public TempUserBean getUserByName(String userName) {
-        TempUserBean user;
-        user = this.registeredUsers.getOrDefault(userName, null);
+        TempUserBean user = this.registeredUsers.getOrDefault(userName, null);
 
         System.out.println("Try to return " + user + ". Received name: " + userName);
 
@@ -183,6 +187,12 @@ public class UsersManagerBean implements Serializable {
     }
 
 
+    /**
+     * "Sends" a message to the 'receiver', given the message text and the sender
+     * @param sender String
+     * @param receiver String
+     * @param msgText String
+     */
     public void sendMessage(String sender, String receiver, String msgText) {
         TempUserBean tempUserBean = this.getUserByName(receiver);
         if (tempUserBean != null) {
@@ -201,6 +211,11 @@ public class UsersManagerBean implements Serializable {
     }
 
 
+    /**
+     * Returns the messages of a user as list
+     * @param userName String
+     * @return List<Message>
+     */
     public List<Message> getMessagesAsList(String userName) {
         List<Message> messagesAsList = new ArrayList<>();
 
@@ -217,26 +232,6 @@ public class UsersManagerBean implements Serializable {
 
         return messagesAsList;
     }
-
-
-    public String getUserMessages(String userName) {
-        if (this.registeredUsers.containsKey(userName)) {
-            TempUserBean user = this.registeredUsers.get(userName);
-            StringBuilder sb = new StringBuilder();
-            for (Integer id : user.getMessages().keySet()) {
-                sb.append(user.getMessages().get(id));
-            }
-            /*for (Message msg : user.getMessagesList()) {
-                sb.append(msg).append("\n");
-            }*/
-
-            return sb.toString();
-        }
-        else {
-            return "No messages";
-        }
-    }
-
 
 
     /**
