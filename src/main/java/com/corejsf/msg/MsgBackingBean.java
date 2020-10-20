@@ -1,5 +1,8 @@
 package com.corejsf.msg;
 
+import com.corejsf.CurrentUserBean;
+import com.corejsf.TempUserBean;
+
 import javax.ejb.EJB;
 import javax.faces.push.Push;
 import javax.faces.push.PushContext;
@@ -7,6 +10,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Named
@@ -17,37 +22,24 @@ public class MsgBackingBean implements Serializable {
     @Inject
 
     @Push
-    private PushContext incoming;
+    private PushContext incoming;  // channel
 
-/*    @Push
-    private PushContext logged_in_users;*/
+    private final HashMap<String, TempUserBean> registeredUsers = new HashMap<>();
+    private List<CurrentUserBean> loggedUsers = new ArrayList<>();
 
-    private String enteredMessage;
 
-    public List<String> getMessages() {
-        return msgService.getMessages();
+
+    private void addRegisteredUser() {
+
     }
 
-//    public void onSendMessage() {
-//        msgService.add(enteredMessage);
-//        incoming.send("newmessage");
-//    }
 
-    public void getList() {
-        incoming.send("newmessage");
+    public void getLoggedUsersList() {
+        incoming.send("loggedUsersList");
     }
 
-    public void getRegistered() {
-        incoming.send("newmessage1");
+    public void getRegisteredUsers() {
+        incoming.send("registeredUsersList");
     }
 
-    // Sender
-    public void setEnteredMessage(String inputMessage){
-        enteredMessage = inputMessage;
-    }
-
-    // Getter
-    public String getEnteredMessage(){
-        return enteredMessage;
-    }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 @ApplicationScoped
 
 public class UsersManagerBean implements Serializable {
+
     /**
      * Instance Variables
      * <strong><em>registeredUsers</em></strong>, type: HashMap
@@ -53,6 +54,7 @@ public class UsersManagerBean implements Serializable {
     public HashMap<String, TempUserBean> getRegisteredUsers() {
         return registeredUsers;
     }
+
 
 
     // Methods

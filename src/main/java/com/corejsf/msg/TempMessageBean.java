@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 @Named("temp_message")
 @RequestScoped
-public class TempMessage implements Serializable {
+public class TempMessageBean implements Serializable {
     private String receiver;
     private String message;
 
@@ -28,4 +28,5 @@ public class TempMessage implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

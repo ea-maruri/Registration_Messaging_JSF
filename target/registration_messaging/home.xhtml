@@ -74,22 +74,6 @@
             </h:form>
 
           </div>
-
-
-          <!-- Is this necessary?? -->
-          <div class="col-sm-12 d-flex justify-content-center">
-            <h:form>
-              <h:inputText value="#{msgBackingBean.enteredMessage}"/>
-              <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.onSendMessage}"/>
-              <f:websocket channel="incoming">
-                <f:ajax event="newmessage" execute="@form" render="@form"/>
-              </f:websocket>
-              <ui:repeat value="#{msgBackingBean.messages}" var="msg">
-                <h:outputText value="" /> one #{msg}
-              </ui:repeat>
-            </h:form>
-          </div>
-
         </div>
       </div>
 
@@ -100,21 +84,23 @@
       <!-- List of users -->
       <div class="container mb-5">
         <div class="row">
+
           <!-- Logged users -->
           <div class="col-md-6">
             <h3>#{msgs.loggedUsersPrompt}:</h3>
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getList}"/>
+                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getLoggedUsersList()}"/>
+
                 <f:websocket channel="incoming">
-                  <f:ajax event="newmessage" execute="@form" render="@form"/>
+                  <f:ajax event="loggedUsersList" execute="@form" render="@form"/>
                 </f:websocket>
 
                 <ul>
                   <ui:repeat value="#{usersManager.loggedUsers}" var="loggedUser">
                     <li>
-                      <h:outputText value="" /> #{loggedUser}
+                      <h:outputText styleClass="text-success" value="#{loggedUser}" />
                     </li>
                   </ui:repeat>
                 </ul>
@@ -124,22 +110,21 @@
           </div>
 
 
-
           <!-- Registered users -->
           <div class="col-md-6">
             <h3>#{msgs.registeredUsersPrompt}:</h3>
 
             <div class="col-md-6 d-flex justify-content-center">
               <h:form>
-                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getRegistered}"/>
+                <h:commandButton value="#{msgs.send}" action="#{msgBackingBean.getRegisteredUsers()}"/>
                 <f:websocket channel="incoming">
-                  <f:ajax event="newmessage1" execute="@form" render="@form"/>
+                  <f:ajax event="registeredUsersList" execute="@form" render="@form"/>
                 </f:websocket>
 
                 <ul>
                   <ui:repeat value="#{usersManager.registeredUsers}" var="registeredUser">
                     <li>
-                      <h:outputText value="" /> #{registeredUser}
+                      <h:outputText styleClass="text-primary" value="#{registeredUser}" />
                     </li>
                   </ui:repeat>
                 </ul>
