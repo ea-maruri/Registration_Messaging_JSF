@@ -14,5 +14,5 @@ Project does not use a **database**; all users are stored in *main memory*.
 
 ## Contributors
 - ea-maruri: UI, User, Registration and Login validations. Created classes: CurrentUserBean.java, UsersManagerBean.java, Message.java, MessageToRemove.java, TempMessageBean.java.
-- EddyATorresC
-- DanAg278
+- EddyATorresC : Validation of user passwords and usernames.
+- DanAg278- Daniel Aguilar: Server Push for loged users list, registered users
